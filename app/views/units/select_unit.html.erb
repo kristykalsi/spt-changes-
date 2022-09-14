@@ -1,0 +1,38 @@
+<div classs="row mt-5">
+  <div class="col-md-4 offset-md-4 text-center">
+    <h2>Student Name: <%= @student.name %></h1>
+    <div class="card">
+        <div class="card-header">
+        <h1>Add Unit</h1>
+        </div>
+        <div class="card-body">
+            <%= form_for add_unit_path do |f| %>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% Unit.all.each do |u| %>
+                            <tr>
+                                <td>
+                                    <%if  @student_units.include?(u) %>
+                                        <input type="checkbox" name="unit_ids[]" value="<%= u.id %>" checked>
+                                    <% else %>
+                                        <input type="checkbox" name="unit_ids[]" value="<%= u.id %>" >
+                                    <% end %>
+                                </td>
+                                <td><%= u.name %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+                <%= hidden_field_tag :student_id, @student.id %>
+                <button type="submit" class="btn btn-primary mt-2">Add Units</button>
+            <%end%>
+        </div>
+    </div>
+  </div>
+</div>

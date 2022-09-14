@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>name:</strong>
+  <%= @student.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @student.email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @student.phone %>
+</p>
+
+<p>
+  <strong>Dob:</strong>
+  <%= @student.dob %>
+</p>
+
+<p>
+  <strong>Classes: </strong>
+  <%= @student.klasses.map(&:name).join(",") %>
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: <%= (@student.klasses.count.to_f / Klass.count.to_f )*100 %>%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+</p>
+
+<p>
+  <strong>Units: </strong>
+  <%= @student.units.map(&:name).join(",") %>
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: <%= (@student.units.count.to_f / Unit.count.to_f )*100 %>%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+</p>
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Back', students_path %>
+| <%= link_to "Add to Class", select_class_path(@student.id) %>
+| <%= link_to "Add Unit", select_unit_path(@student.id) %>
